@@ -73,7 +73,8 @@ Control, and Robotics</p>
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div><img class="img-fluid" src="assets/img/portfolio/cake.png" alt="Tasty Cake"/>
+                            </div><img class="img-fluid" src="assets/img/portfolio/diagram-IMU_0.jpg" alt="Lab 2"/>
+                            <h5 class = "text-center">Lab 2</h5>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-5">
@@ -302,16 +303,53 @@ Control, and Robotics</p>
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary mb-0">Tasty Cake</h2>
+                                    <h2 class="portfolio-modal-title text-secondary mb-0">Lab 2: Inertia Measurement Unit</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
                                         <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/portfolio/cake.png" alt="Tasty Cake"/>
+                                    <!-- Portfolio Modal - Image-->
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <p class="mb-5">In this lab, the objective is to implement the Inertia Measurement Unit ICM20948, collect and optimize the movement data from 
+                                                    accelerometer and gyroscope respectively. Analyze the data behavior in frequency domain. The lab started fromo the sensor connection as shown below.
+                                    <img class="img-fluid img-cetered" src = "assets/img/portfolio/Lab2Setup.HEIC" alt="">
+
+                                    <h3 class = "text-center">Example Code</h3>
+                                    <p class = "modal-body text-left">The IMU sensor was connected to the Artemis board with the QWIIC cables. By executing the example code, the generated movement data were shown in the Serial port correspondingly</p>
+                                    <div class = "embed-container"
+                                    ><iframe width="419" height="745" src="https://www.youtube.com/embed/CMXfKbm41GQ" title="ECE5160 Lab2 Task 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                    </div>
+                                    <P class = "text-left">According to the manufacturing specification, the address value AD0_VAL was changed from 1 to 0 to match the last digit of the address from the IMU board. </h3>
+                                    <h3 class = "text-center">Accelerometer</h3>
+                                    <P class = "text-left">In order to collect the accelerometer pitch and roll data, the two equations were used to calculate the rotations.</h3>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/pitch_roll_eq.png" alt="">
+                                    <p class = "modal-body text-left">By rotating the IMU, the pitch and roll data were reflected and displayed in the Serial Plotter as seen below. The changing of orientation/angle was visualized and shown the sinusoidal patterns</p> 
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/Accel1.png" alt="">
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/Accel2.png" alt="">
+                                    <p class = "modal-body text-left">To improve the accuracy of the data, the two-point calibration was implemented. 
+                                        The main idea was to calculate the caonversion factor based on the expected reference values and the actual outputs. The calibration function was seen below. </p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/Calibration.png" alt = "">
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/Calibration2.png" alt = "">
+                                    <h3 class = "text-center">Fourier Transform Spectrum</h3>  
+                                    <p class = "modal-body text-left">Before the data of accelerometer optimized, a Fourier Transform Spectrum analysis was conducted to determine the cut off frequency and compared the outcomes of the low-pass filter implementation.
+                                        The blue plots displayed the pitch data frequency specturm. Clearly, without the low-pass filter, the raw data was quite noisy. The y axis scaled differently in the two plots. The amplitude fluctuation was reduced with the low pass filter. Based on the specturm, the cut-off frequency was set to 4Hz, which calculated the alpha value to be 0.408.
+                                    </p>   
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/pitchWithoutLPF.png" alt="">
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/pitchWithLPF.png" alt="">
+                                    <p class = "modal-body text-left">Similarly, the roll data was optimized with the low-pass filter as shown below, the noisy decreased and the signal became more consistent with less spikes</p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/rollWithoutLPF.png" alt="">
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/rollWithLPF.png" alt="">
+                                    <h3 class = "text-center">Gyroscope Data </h3>
+                                    <p class = "text-left">The gyroscope was implemented differently than the accelerometer. It measures angular velocity, so the approach involved multiplying the reading by the time step at which the control loop ran. This method generated positional angles with relatively low noise compared to the accelerometer data. However, the resulting angles tended to drift from their initial values gradually and the mistakes would be accumulated because of the integration.</p>
+                                    <div class = "embed-container"
+                                    ><iframe width="424" height="754" src="https://www.youtube.com/embed/1ZeEfS2va2I" title="Lab2 Gyroscope" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                    </div>
+                                    <p class = "modal-body text-left">To combine the accelerometer and gyroscope data and output a more stable signal, a complimentary filter was implemented, which had a weight varaible alpha. In the arduino, the variable was called weight to determine the ratio of the data used from either 
+                                        accelerometer or gyroscope. In this case, the weight was set 0.97 so that more accelerometer data was used since the gyroscope brough some delay and drifting to the outputs. 
+                                    </p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/CompFilterArduino.png" alt="">
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
