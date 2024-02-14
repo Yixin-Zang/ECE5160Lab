@@ -347,9 +347,12 @@ Control, and Robotics</p>
                                     ><iframe width="424" height="754" src="https://www.youtube.com/embed/1ZeEfS2va2I" title="Lab2 Gyroscope" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                     </div>
                                     <p class = "modal-body text-left">To combine the accelerometer and gyroscope data and output a more stable signal, a complimentary filter was implemented, which had a weight varaible alpha. In the arduino, the variable was called weight to determine the ratio of the data used from either 
-                                        accelerometer or gyroscope. In this case, the weight was set 0.97 so that more accelerometer data was used since the gyroscope brough some delay and drifting to the outputs. 
+                                        accelerometer or gyroscope. In this case, the weight was set 0.1 so that more gyroscope data was used since the accelerometer brough some noise to the output. With the complimentary filter, the output signal was smoother and less cumulative errors. 
                                     </p>
                                     <img class = "img-cetered img-fluid" src = "assets/img/portfolio/CompFilterArduino.png" alt="">
+                                    <div class = "embed-container"
+                                    ><iframe width="424" height="754" src="https://www.youtube.com/embed/Hlz7WVIzzrc" title="Lab2 Comlimentary Filter" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                    </div>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
