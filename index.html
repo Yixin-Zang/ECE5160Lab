@@ -66,7 +66,11 @@ Control, and Robotics</p>
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div><img class="img-fluid" src="assets/img/portfolio/LOGO_large-05.jpg" alt="Lab 1"/>
-                            <h5 class = "text-center">Lab 1</h5>
+                            <br>
+                            <br>
+                            <br>
+                            <h5 class = "text-center">Lab 1: BLE</h5>
+
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-5">
@@ -74,14 +78,18 @@ Control, and Robotics</p>
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div><img class="img-fluid" src="assets/img/portfolio/diagram-IMU_0.jpg" alt="Lab 2"/>
-                            <h5 class = "text-center">Lab 2</h5>
+                            <h5 class = "text-center">Lab 2: IMU</h5>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div><img class="img-fluid" src="assets/img/portfolio/circus.png" alt="Circus Tent"/>
+                            </div><img class="img-fluid" src="assets/img/portfolio/distanceIcon.png" alt="Lab 3"/>
+                            <br>
+                            <br>
+                            <br>
+                            <h5 class = "text-center">Lab 3: ToF Sensor</h5>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-5">
@@ -312,6 +320,7 @@ Control, and Robotics</p>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
                                     <!-- Portfolio Modal - Text-->
+                                    <h3 class = "text-center">Objective</h3>
                                     <p class="mb-5">In this lab, the objective is to implement the Inertia Measurement Unit ICM20948, collect and optimize the movement data from 
                                                     accelerometer and gyroscope respectively. Analyze the data behavior in frequency domain. The lab started fromo the sensor connection as shown below.
                                     <img class="img-fluid img-cetered" src = "assets/img/portfolio/Lab2Setup.HEIC" alt="">
@@ -373,17 +382,73 @@ Control, and Robotics</p>
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary mb-0">Circus Tent</h2>
+                                    <h2 class="portfolio-modal-title text-secondary mb-0">Lab3: Time of Flight(ToF) Sensor</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
                                         <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/portfolio/circus.png" alt="Circus Tent"/>
+                                    <!-- Portfolio Modal - Image-->
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
+                                    <h3 class = "text-center">Objective</h3>
+                                    <p class="modal-body text-left">In this lab, the goal was to implement two distance sensors and connect them to the Artemis board. The detected distance 
+                                        data was analyzed, different sensor modes were tested, and a sensor placement design concept was discussed. 
+                                    </p>
+                                    <h3 class = "text-center">Prelab</h3>
+                                    <p class="modal-body text-left"><span style="font-weight:bold;">(1) I2C Sensor Address: </span> According to the VL53L1X model datasheet, the I2C address is shown as 0x52.
+                                    After uploading the "Wire-I2C" example sketch, the address was identified as 0x29 from the Serial monitor. By converting 0x29(00101001) and 0x52(01010010) to binary, we could find
+                                    that the address from the serial monitor is the 1 bit right-shifted I2C address. The least significant bit was used to determine the status of reading or writing. </p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/ToF_I2C_Addr.png" alt="">
+                                    <p class ="modal-body text-left"><span style="font-weight:bold;">(2) Multi-Sensor Compatibility: </span> In order to collect front and rear distance readings simultaneously, the I2C address of the ToF sensor must be
+                                    differentiated. By modifying the address of one of the ToF sensor to 0x30 in Arduino, the address compatibility issue was solved. The code is shown below. </p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/ToF_Change_Addr.png" alt="">
+                                    <p class ="modal-body text-left"><span style="font-weight:bold;">(3) ToF Sensor Placement:</span>After playing with the robot in lab2, one fact was determined that the robot was fliping 180 degrees relatively easily. Therefore, the field of distance measurement should have coverages 
+                                    at the front and rear sides, which provide a comprehensive distance information about the robot. The distance mode for each ToF sensor can be adjust and was discussed later in the lab</p>
+                                   <p  class = "modal-body text-left">To facilitate the lab procedures, a ToF connection sketch was created as the reference for soldering.</p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/ToF_Connect_Sketch.jpeg" alt="">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <h3 class = "text-center">Task 1: Sensor Connection</h3>
+                                   <p class = "modal-body text-left">In this part, the ToF sensor pins were soldered to a QWIIC cable. According to the QWIIC datasheet, the red wire was soldered to VDD pin, and the black cable was soldered to GND pin. 
+                                    SDA and SCL were soldered to the ToF sensor pins respectively. For the second sensor, the XSHUT pin was soldered directly to a GPIO pin 8 from the Artemis board so that the I2C address could be changed. After compeleting ToF sensor soldering, 
+                                    two sensors were connected to the QWIIC break out board. 
+                                   </p>
+                                   <img class = "img-cetered img-fluid" src = "assets/img/portfolio/ToF_Soldered.HEIC" alt="">
+                                   <img class = "img-cetered img-fluid" src = "assets/img/portfolio/QWIIC_Breakout.HEIC" alt="">
+                                   <br>
+                                   <br>
+                                   <br>
+                                   <h3 class = "text-center">Task 2: Test Chosen-mode</h3> 
+                                   <p class = "modal-body text-left">To examine the accruacy of the sensor, the tested mode was set to short distance. Under short distance mode, the range of distance is 1.3 meters. 
+                                        The tested range is from 800mm to 100mm. Based on the graph below, the ToF sensor has an excellent accuracy performance in short distance mode since the measured dataset has a high overlaping area with the reference dataset. At current stage, the short distance range provides 
+                                    a relatively solid accuracy and distance coverage. Therefore, ToF sensor should implement short distance mode in later labs according to the analysis above.</p> 
+                                   <img class = "img-cetered img-fluid" src = "assets/img/portfolio/ToF_Distance_Measurement.png" alt="">
+                                   <h3 class = "text-center">Task 3: Two ToF Sensors</h3> 
+                                   <P class = "modal-body text-left">As mentioned in the prelab section, to implement two ToF sensors and receive two different distance readings at the same time, the I2C address was required to change. After modified the I2C address, the seperated readings were displayed on the Serial monitor.</P>
+                                   <img class = "img-cetered img-fluid" src = "assets/img/portfolio/ToF_Two_Readings.png" alt="">
+                                   <h3 class = "text-center">Task 4: ToF Sensor Speed </h3>
+                                   <p class = "modal-body text-left">To leverage the ToF sensor reading speed, the data ready were checked in the loop for two sensors respectively
+                                    . The readings were generated once the data was ready. stopRanging and clearInterupt commands were removed to reduce the delay. 
+                                    Two time stamps were used to calculate the loop rate, which was 8ms average. The possible limiting factors were serial print to the monitor and distance data acquisition time. 
+                                   </p>
+                                   <img class = "img-cetered img-fluid" src="assets/img/portfolio/ToF_Speed.png" alt="">
+                                   <br>
+                                   <br>
+                                   <br>
+                                   <h3 class = "text-center"> Task 5: Time vs Distance</h3>
+                                   <p class = "modal-body text-left">Similar to lab2, the ToF sensor data was required to transmit to the computer via BLE. A case called GET_TOF was developed to collect the ToF data and send the arrays via BLE. By generating the plot, we could see the ToF readings were visualized and transmitted successfully.</p>
+                                   <img class = "img-cetered img-fluid" src = "assets/img/portfolio/GET_TOF.png" alt="">
+                                   <img class = "img-cetered img-fluid" src = "assets/img/portfolio/ToF_Plot.png" alt="">
+                                   <br>
+                                   <br>
+                                   <br>
+                                   <h3 class = "text-center"> Task 6: IR Sensor Discussion</h3>
+                                   <p class = "modal-body text-left">Infrared light, being invisible, permeates our daily environment and can significantly influence infrared sensors. Thus, when designing such sensors, it is imperative to select a specific wavelength of infrared light to minimize interference. Moreover, it is advisable to avoid deploying these sensors in areas with strong light sources. The TOF sensor, particularly, tends to exhibit superior performance under low-light conditions.
+
+                                    In the experimentation conducted with various reflective surfaces, minimal impact on the sensor's results was observed irrespective of the color of the surface. While darker objects theoretically absorb more light and should produce less return energy, this effect was not evident in practice. Notably, the sensor demonstrated the ability to penetrate glass-like surfaces, enabling measurement of the distance to objects situated behind the glass, which is undesirable. This issue may be less prevalent with ultrasonic distance sensors due to the differing properties of electromagnetic and mechanical waves.</p>
+                                   <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
                         </div>
