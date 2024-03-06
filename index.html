@@ -501,11 +501,12 @@ Control, and Robotics</p>
                                 
                                 <h3 class = "text-center">PWM Signal Generation and Demonstration</h3>   
                                 <p class = "modal-body text-left">After compeleting the motor driver soldering, the verification of PWM was required to check that PWM signal was able to be output and recevied successfully
-                                    . In order to implement the verification, the motor driver was powered by an external power supply with the 3.7V output, which is the same voltage output as the battery. 
+                                    . In order to implement the verification, the motor driver was powered by an external power supply with the 3.7V output, which is the same voltage output as the battery. The ground pin was hooked with the power supply ground cable.
                                     The input pin from the motor driver was connected to the oscilloscope. The PWM generation code was uploaded to the Artemis board. It initalized the GPIO values with the corresponding soldered pins.
                                     The analogWrite() function generated a PWM signal from the board to the motor driver. The duty cycle was set to 127/255, which provided an average of 50% output voltage. By verifing the wave form from
                                     the oscilloscope, there was half of the time the voltage was set to high. Therefore, the PWM signal matched the expected value. 
                                 </p>
+                                <img class = "img-cetered img-fluid" src = "assets/img/portfolio/oscilloscope_setup.HEIC" alt="">
                                 <img class = "img-cetered img-fluid" src="assets/img/portfolio/PWM_verify_code.png" alt="">
                                 <img class = "img-cetered img-fluid" src="assets/img/portfolio/PWM_oscilloscope.HEIC" alt="">
                                 <br>
@@ -564,10 +565,10 @@ Control, and Robotics</p>
                                 <img class = "img-cetered img-fluid" src = "assets/img/portfolio/PWM_oscilloscope.HEIC" alt="">
                                 <p class="modal-body text-left"><span style="font-weight:bold;">(2) Slowest Motion PWM value discussion:
                                 </span>In order to determine the minimal value of PWM to overcome the non-static friction of the robot, the following code was uploaded. Each iteration, the robot would reduce the PWM signal by 1 with the initial value of 30 for the right motor and 35 for the left motor. 
-                                    The final values were determined when the robot was fully stationary. An external clock was used to check the number of iterations for the final calculations. The final values were 24 for the right and 29 for the left motors. 
+                                    The final values were determined when the robot was fully stationary. An external clock was used to check the number of iterations for the final calculations. The final values were 24 for the right and 29 for the left motors since there were 6 iterations. 
                                 <img class = "img-cetered img-fluid" src = "assets/img/portfolio/nonstatic_lowest_pwm.png" alt=""> 
                                 <div class = "embed-container" >
-
+                                    <iframe width="420" height="747" src="https://www.youtube.com/embed/C1GE0CF3sIQ" title="ECE5160 Lab4 Slowest PWM in motion" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                 </div>
                                 <br>
                                 <br>
