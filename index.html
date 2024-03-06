@@ -69,7 +69,7 @@ Control, and Robotics</p>
                             <br>
                             <br>
                             <br>
-                            <h5 class = "text-center">Lab 1: BLE</h5>
+                            <h5 class = "text-center">Lab 1: Bluetooth Low Energy</h5>
 
                         </div>
                     </div>
@@ -78,7 +78,7 @@ Control, and Robotics</p>
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div><img class="img-fluid" src="assets/img/portfolio/diagram-IMU_0.jpg" alt="Lab 2"/>
-                            <h5 class = "text-center">Lab 2: IMU</h5>
+                            <h5 class = "text-center">Lab 2: Inertial Measurement Unit</h5>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-5">
@@ -89,14 +89,18 @@ Control, and Robotics</p>
                             <br>
                             <br>
                             <br>
-                            <h5 class = "text-center">Lab 3: ToF Sensor</h5>
+                            <h5 class = "text-center">Lab 3: Time-of-Flight Sensor</h5>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div><img class="img-fluid" src="assets/img/portfolio/game.png" alt="Controller"/>
+                            </div><img class="img-fluid" src="assets/img/portfolio/dc_motor_icon.png" alt="Lab4"/>
+                            <br>
+                            <br>
+                            <br>
+                            <h5 class = "text-center">Lab 4: Motor and Open Loop Control</h5>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-5">
@@ -465,18 +469,76 @@ Control, and Robotics</p>
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary mb-0">Controller</h2>
+                                    <h2 class="portfolio-modal-title text-secondary mb-0">Lab4: Motor and Open Loop Control</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
                                         <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/portfolio/game.png" alt="Controller"/>
+                                    <!-- Portfolio Modal - Image-->
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
+                                    <h3 class = "text-center">Objective</h3>
+                                    <p class="modal-body text-left">The goal of this lab was to integrate two dual motor drivers to the Artemis and connect dc motors to implement the open loop control of the robot. 
+                                        The motors were triggered by PWM signals to control the motion. 
+                                    </p>
+                                    <h3 class = "text-center">Prelab</h3>
+                                    <p class="modal-body text-left"><span style="font-weight:bold;">(1) Assembly connection diagram:  
+                                </span>As the pictures shown below, the actual wiring process was
+                                based on the designed connections. As discussed in the lecture, by shorting the four pairs of pin: BIN1 and AIN2, BIN2 and AIN2, BOUT1 and AOUT2, BOUT2 and AOUT2
+                                , the artemis was able to utilize two pins to conect the motor driver and control the motor, also increased the current two times greater than the original design. All the input pins 
+                                were soldered to the Artemis board using pin 13, 12, 6, and 7. According to the datasheet of Artemis nano, except pin 8 and 10, other I/O pins are capable to generate PWM signals.
+                                In order to create the bridge between pin pairs, several short length wires were soldered to connect them together. Following the diagram, the motor battery was connected to the GND and VIN pins for both 
+                                motor drivers in series. </p>
+                                <img class = "img-cetered img-fluid" src = "assets/img/portfolio/motor_driver_connection.jpg" alt="" >
+                                <img class = "img-cetered img-fluid" src = "assets/img/portfolio/motordriver_solder.HEIC" alt="">    
+                                <br>
+                                <br>
+                                <p class="modal-body text-left"><span style="font-weight:bold;">(1) Two Power Supply:  
+                                </span> The main reason of using two 850mAh batteries for the motors and the Artemis board independently was to isolate and protect the system from potential interferences. 
+                                The motors have relatively greater power draw from the battery. The second battery powering the Artemis can maintain the remote controllability of the robot. The design 
+                                seperates the control module and acturator module to avoid unexpected Artemis shutdown due to battery poewr depletion. </p>
+                                
+                                <h3 class = "text-center">PWM Signal Generation and Demonstration</h3>   
+                                <p class = "modal-body text-left">After compeleting the motor driver soldering, the verification of PWM was required to check that PWM signal was able to be output and recevied successfully
+                                    . In order to implement the verification, the motor driver was powered by an external power supply with the 3.7V output, which is the same voltage output as the battery. 
+                                    The input pin from the motor driver was connected to the oscilloscope. The PWM generation code was uploaded to the Artemis board. It initalized the GPIO values with the corresponding soldered pins.
+                                    The analogWrite() function generated a PWM signal from the board to the motor driver. The duty cycle was set to 127/255, which provided an average of 50% output voltage. By verifing the wave form from
+                                    the oscilloscope, there was half of the time the voltage was set to high. Therefore, the PWM signal matched the expected value. 
+                                </p>
+                                <img class = "img-cetered img-fluid" src="assets/img/portfolio/PWM_verify_code.png" alt="">
+                                <img class = "img-cetered img-fluid" src="assets/img/portfolio/PWM_oscilloscope.HEIC" alt="">
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <h3 class = "text-center">Motor Testing</h3>
+                                <p class = "modal-body text-left">After assessing the PWM signal generation, the original control board was replaced and the motor driver was soldered to the Artemis and motor with
+                                    designated pins. To test the motor functionality, the below code was uploaded to the Artemis to check if the motor could rotate clockwisely and counter clockwisely. The motor spining 
+                                    speed was determined by the duty cycle. The value was set to 100 and the motor was spining relatively fast. The video demonstrated the motor was able to rotate in two directions properly. 
+                                </p>
+                                <img class = "img-cetered img-fluid" src="assets/img/portfolio/right_motor_test.png" alt="">
+                                <div class = "embed-container"
+                                ><iframe width="420" height="747" src="https://www.youtube.com/embed/QautTjrz4mo" title="ECE5160 Lab4 One Motor Spining" 
+                                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                                 </div>
+                                <p class = "modal-body text-left">The left motor was soldered to the motor driver and the Artemis， after the right motor was verified. The wires and components were organized
+                                    and firmly mounted to the chassis. The layout of the robot is shown below. </p>
+                                <img class = "img-cetered img-fluid" src="assets/img/portfolio/lab4_car_layout.jpg" alt="">
+                                <br>
+                                <br>
+                                <br>
+                                <h3 class = "text-center">Lower Limit PWM Value</h3>
+                                <p class = "modal-body text-left">To better understand the relation between motor torque and PWM value, the minimum limit was explored. After multiple testing, the lowest values to 
+                                    move the robot for right and left motors were determined as 25 and 36 respectively.</p>
+                                <img class = "img-cetered img-fluid" src="assets/img/portfolio/lowest_pwm.png" alt="">
+                                <div class = "embed-container" >
+                                    <iframe width="420" height="747" src="https://www.youtube.com/embed/AVDDrt7vk7Q" title="ECE5160 Lab4 Lowest Start PWM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                </div>
+                                
+                                <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
+ 
+                            </div>
                             </div>
                         </div>
                     </div>
