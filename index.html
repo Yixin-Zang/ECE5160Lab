@@ -107,7 +107,14 @@ Control, and Robotics</p>
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal4">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div><img class="img-fluid" src="assets/img/portfolio/safe.png" alt="Locked Safe"/>
+                            </div><img class="img-fluid" src="assets/img/portfolio/PID Icon.png" alt="Locked Safe"/>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <h5 class = "text-center">Lab 5: PID Position Control</h5>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-5">
@@ -591,16 +598,79 @@ Control, and Robotics</p>
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary mb-0">Locked Safe</h2>
+                                    <h2 class="portfolio-modal-title text-secondary mb-0">Lab6: PID Position Control</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
                                         <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/portfolio/safe.png" alt="Locked Safe"/>
+                                    <!-- Portfolio Modal - Image-->
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <p class="mb-5">In this lab, the objective was to implement PID controller to the robot and control the robot remotely. The specific task of the position control was to drive the robot towards 
+                                        a wall and stop at distance around 30.4 cm. P, PI, and PID controllers were set, tuned and tested. The analysis was conducted based on the data collection and plots. </p>
+                                    <h3 class = "text-center">Prelab</h3>
+                                    <p class = "modal-body text-left">In order to achieve the data collection from the front Time-of-Flight Sensor, three arrays were instantiated first including 
+                                        time stamp array, ToF distance array, and PWM output array in Arudino. Each element with the same index were appended to estring and transimtted via BLE. Then the data was extracted to form lists on PC using a callback function in Python.
+                                        The code is shown below. 
+                                    </p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab5 send data.png" alt="">
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab5 Python callback.png" alt="">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <h3 class = "text-center">PID Implementation</h3>
+                                    <p class = "modal-body text-left">The PID equations were developed in Arudino to reflect the updating errors and corresponding PWM output to the motors. For the intergral component, an error limit was set to achieve wind-up protection since the intergrated error could increase unexpectedly. 
+                                        For the PWM output, minimal outputs were determmined based on the result of deadband PWM value from lab4.
+                                        When the PWM output is over the maximum 255, the value would be set to lower than 255 to protect the motor. The backward PWM had a 1.2 coefficient to speed up the hard stop action. 
+                                          </p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab5 pid equation.png" alt="">
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab5 PID motor.png" alt="">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <p class = "modal-body text-left">In order to change the Kp, Ki, Kd values more efficently and flexibly, SET_PID command was implemented in Arudino which allowed the direct update from PC </p>
+                                    <img class = "img-cetered img-fluid" src="assets/img/portfolio/lab5 set pid.png" alt="">
+                                    <img class = "img-cetered img-fluid" src="assets/img/portfolio/lab5 set pid python.png" alt="">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <p class = "modal-body text-left">P controller was chose first for the direct proportional control and achieved the linear effect to the distance errors. A higher Kp value would cause a more aggresive response with the tradeoff of overshooting.
+                                        According to the maximum distance error 4000mm and the maximum PWM value 255, a starting logical guess was around 0.06. Due to the motor torque differences, after multiple attempts, a signle P controller was applied with a Kp value set to 0.03, which successfully stopped the robot before hitting the wall.  </p>
+                                    
+                                    <div class = "embed-container"><iframe width="420" height="747" src="https://www.youtube.com/embed/Dd8GET-SwvE" title="ECE5160 Lab5 P Controller" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+                                    <p class ="modal-body text-left">As the video demonstrated, even though the robot stopped and adjusted the position against the wall, it had a relatively large overshooting and strong oscillation. To better visualize the robot behavior, a distance versus time plot was generated
+                                        to indicate the oscillation behavior and overshooting issue. 
+                                    </p>
+                                    <img class = "img-cetered img-fluid" src="assets/img/portfolio/lab5 P controller ToF.png" alt="">
+                                    <img class = "img-cetered img-fluid" src="assets/img/portfolio/lab5 P control PWM.png" alt="">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <p class = "modal-body text-left">The optimization step was then decided by introducing the derivative component to the controller. Under the PD controller, the robot converged to the setpooint wiht less overshoot by decresing the Kp value, and smoothed the oscillation considerably with the support of dampening the system.   </p>
+                                    <div class = "embed-container">
+                                        <iframe width="420" height="747" src="https://www.youtube.com/embed/woM_WwgVwzg" title="ECE5160 Lab5 PD Controller" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                    </div>
+                                    <p class = "modal-body text-left">According to the video and following plots, the robot behavior was improved with significantly shorter overshoot and less degree of oscillation. The PWM output plots between P and PD controller demonstrated a distinctive difference. </p>
+                                    <img class = "img-cetered img-fluid" src="assets/img/portfolio/lab5 PD ToF.png" alt="">
+                                    <img class = "img-cetered img-fluid" src="assets/img/portfolio/lab5 PD PWM.png" alt ="">
+                                    <p class = "modal-body text-left">Integral control is crucial for eliminating the steady-state error that proportional control alone cannot address. Ki integrates the error over time, offering a correction that grows as long as an error exists. </p>
+                                    <div class = "embed-container">
+                                        <iframe width="420" height="747" src="https://www.youtube.com/embed/MR20Qbqawsk" title="ECE 5160 Lab5 PID Controller" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                    </div>
+                                    <img class = "img-cetered img-fluid" src="assets/img/portfolio/lab5 PID ToF.png" alt ="">
+                                    <img class = "img-cetered img-fluid" src="assets/img/portfolio/lab5 PID PWM.png" alt="">
+                                    <p class = "modal-body text-left">The final tuning of PID controller showed the fast, stable and robust controllability of the robot. Therefore, the robot was capable to position itself at a setpoint based on the front ToF sensor only. </p>
+                                    <h3 class ="text-center">Extrapolation</h3>
+                                    <p class = "modal-body text-left">The purpose of extrapolation was to leverage the distance measuring efficency when the Artemis did not recieve the distance value from the ToF sensor. The estimation was based on the principle of linear estimation. The predicted point was calcualted by the slope and the corresponding time step using previous measurement data. The process increased the amount of data remarkably. 
+                                        The control system could adjust its outputs based on estimated current distances rather than waiting for the next sensor update. This can make the system more responsive to changes.
+                                    </p>
+                                    <div class = "embed-container">
+                                        <iframe width="420" height="747" src="https://www.youtube.com/embed/Y8qV5g2vSQk" title="ECE5160 Lab5 Extrapolation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                    </div>
+                                    <img class = "img-cetered img-fluid" src="assets/img/portfolio/lab5 extrapolation ToF.png" alt="">
+                                    <img class = "img-cetered img-fluid" src="assets/img/portfolio/lab5 extrapolation PWM.png" alt="">
+                                    
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
