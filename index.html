@@ -69,6 +69,7 @@ Control, and Robotics</p>
                             <br>
                             <br>
                             <br>
+                            <br>
                             <h5 class = "text-center">Lab 1: Bluetooth Low Energy</h5>
 
                         </div>
@@ -113,7 +114,6 @@ Control, and Robotics</p>
                             <br>
                             <br>
                             <br>
-                            <br>
                             <h5 class = "text-center">Lab 5: PID Position Control</h5>
                         </div>
                     </div>
@@ -121,7 +121,13 @@ Control, and Robotics</p>
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal5">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div><img class="img-fluid" src="assets/img/portfolio/submarine.png" alt="Submarine"/>
+                            </div><img class="img-fluid" src="assets/img/portfolio/Orientation Control.png" alt="Submarine"/>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <h5 class = "text-center">Lab 6: PID Orientation Control</h5>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-5">
@@ -598,7 +604,7 @@ Control, and Robotics</p>
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary mb-0">Lab6: PID Position Control</h2>
+                                    <h2 class="portfolio-modal-title text-secondary mb-0">Lab5: PID Position Control</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -688,16 +694,61 @@ Control, and Robotics</p>
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary mb-0">Submarine</h2>
+                                    <h2 class="portfolio-modal-title text-secondary mb-0">Lab6: Orientation Control</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
                                         <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    <!-- Portfolio Modal - Image--><img class="img-fluid rounded mb-5" src="assets/img/portfolio/submarine.png" alt="Submarine"/>
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <p class="mb-5">In this lab, we also implemented PID controller to rotate the robot to the desired orientation. The orientation was determined based on IMU readings. 
+                                        Multiple controllers were implemented, tested and compared. 
+                                    </p>
+                                    <h3 class = "text-center">Prelab</h3>
+                                    <p class = "modal-body text-left">Similar to the lab5 content, in order to escalate troubleshooting and debugging processes, time stamps, orientation readings and PWM output were recorded and sent over bluetooth</p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab6 arduino send data.png" alt="">
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab6 python handle data.png" alt="">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <h3 class = "text-center">PID Pre Implementation</h3>
+                                    <p class = "modal-body text-left">Before the implementation of PID, to simplify the PID tuning process, the Kp, Ki, Kd parameters were set to global variables which allowed a direct change from the laptop. For the constant command receiving objective, the function was placed inside the main loop. The main body of the PID controller had the similar structure as we implemented in lab5.
+                                        The major difference was the measuring data came from IMU. Since the IMU recorded the acceleration rather than the actual angle. A derivative terms was added to calculate the estimated orientation. The sampling time was set to 10 seconds which was enough to the controlling action. 
+                                    </p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab6 IMU measurement.png" alt="">
+                                    <br>
+                                    <br>
+                                    <h3 class = "text-center">P Controller</h3>
+                                    <p class = "modal-body text-left">The P controller was first implemented and the goal was to rotate the robot 90 degrees and remain in the stationary spot. Using a P controller, the Kp value was tested and tuned. 
+                                        Based on the PWM output which generated based on the calculation of the error, the Kp value was set to 0.8 which provided a steady state behavior. 
+                                    </p>
+                                    <div class = "embed-container">
+                                        <iframe width="420" height="747" src="https://www.youtube.com/embed/iAZ1IWBlJR4" title="lab 6 orientation P controller" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    </div>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab6 P controller yaw.png" alt="">
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab6 P controller PWM.png" alt="">
+                                    <p class = "modal-body text-left">According to the video and plots, P controller had a relatively low response time to reach steady state and there was excessive oscillation after reaching the steady state. </p>
+                                    <h3 class = "text-center">PI Controller and Wind Up protection (5000 level)</h3>
+                                    <p class = "modal-body text-left">The integral term was added to the controller output calculation. By introducing the integrated error over time, the response time was increased with the tradeoff of overshooting that is shown in the yaw plot.
+                                         In order to prevent the integral term dominants the error term, and output, the upper limit and lower limit were set to 200 and -200 respectively. The final Kp and Ki values were 0.8 and 0.15</p>
+                                    
+                                    <div class = "embed-container">
+                                        <iframe width="420" height="747" src="https://www.youtube.com/embed/z7a_i1C5eUM" title="lab6 PI controller" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    </div>
+                                    <img class = "img-cetered img-fluid" src="assets/img/portfolio/lab6 PI controller yaw.png" alt="">
+                                    <img class = "img-cetered img-fluid" src="assets/img/portfolio/lab6 PI controller PWM.png" alt="">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <h3 class = "text-center">PID Controller</h3>
+                                    <p class = "modal-body text-left">By bringing the derivative term to predict the errors, the oscillation were reduced. The overshooting were optimized by reducing the Ki value and increasing the Kp value. The PWM plot indicated the controlling action to smooth the control. The yaw plot also demonstrated the optimization of turning the PID parameters. </p>
+                                    <div class = "embed-container">
+                                        <iframe width="420" height="747" src="https://www.youtube.com/embed/i_0MYqoHIfc" title="lab6 PID controller" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    </div>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab6 PID controller yaw.png" alt="">
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab6 PID controller PWm.png" alt="">
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
@@ -738,6 +789,8 @@ Control, and Robotics</p>
                 <!-- About Section Heading-->
                 <div class="text-center">
                     <h2 class="page-section-heading d-inline-block text-white">ABOUT</h2>
+                    <p class = "text-center">This course focuses on systems level design and implementation of dynamic autonomous robots. We will design a fast autonomous car and explore dynamic behaviors, acting forces, sensors, and reactive control on an embedded processor, as well as the benefit of partial off-board computation, 
+                        low latency software, and noise tolerant implementation.</h5>
                 </div>
                 <!-- Icon Divider-->
                 <div class="divider-custom divider-light">
