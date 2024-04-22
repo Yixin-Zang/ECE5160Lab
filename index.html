@@ -918,6 +918,8 @@ Control, and Robotics</p>
                                         In the update step, the predicted belief (bel_bar) is adjusted to reflect the sensor readings from the robot's new state. This involves looping through all the states using three nested loops, similar to the previous approach. For each state, the probability of obtaining the current sensor readings is multiplied by the existing belief at that grid location.  </p>
                                     <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab10 update step.png" alt="">
                                     <h3 class = "text-center">Simulation</h3>
+                                    <p class = "modal-body text-left">The simulation was demonstrated below. The red line was the odometry readings, which had considerable devation compared with the ground truth (Green Line). 
+                                        After applying the Bayes Filter algorithm, the bluemline, belief trajectory, overlapped the ground truth in the most of the parts, which indicated a higher accuracy.  </p>
                                     <div class = "embed-container">
                                         <iframe width="600" height="494" src="https://www.youtube.com/embed/uBYShgUJNWs" title="ECE5160 Lab10 Localization Simulation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                     </div>
