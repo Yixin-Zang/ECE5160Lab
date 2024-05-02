@@ -817,7 +817,19 @@ Control, and Robotics</p>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">New Image Description</p>
+                                    <p class="mb-5">In this lab, the goal was to implement Kalman Filter to speed up the data point by predicting the robot behavior. The main data collection accleration comes from Time-of-Flight sensor data.  </p>
+                                    <h3 class = "text-center">Drag and Momentum Estimation</h3>
+                                    <p class = "modal-body text-left">Before construct Kalman Filter, the basic dynamic data were required. In this case, the terms are drag and momentum. 
+                                        The value was obtained by driving the car towards a wall while logging motor input values and ToF sensor output. The PWM value of 100, chosen from a previous lab, was utilized.
+                                        The steady-state velocity and 90% rising time were determined using the time and detected distance, which are necessary for calculating drag and momentum. The graphs below demonstrate that the car was driven towards the wall. To prevent a collision, an active brake was employed to stop the car 100mm before the wall and avoid a severe crash.
+                                    </p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab7 KF tof vs time.jpg" alt="">
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab7 KF velocity.jpg" alt="">
+                                    <p class = "modal-body text-left">Based on the plots, the steady state was around 2000mm/s and the 90% rising time was roughly at 2.5s. The drag and momentum were then calculated based on the equation shown below.</p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/Lab7 KF d m.png" alt="">
+                                    <h3 class = "text-center">Initialize Kalman Filter</h3>
+                                    <p class = "modal-body text-left">According to the lecture slide and Kalmen Filter pseudocode, matrices A, B, and C are required to initialize, which provides the state space equations. </p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/Lab7 KF state space eq.jpg" alt="">
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
