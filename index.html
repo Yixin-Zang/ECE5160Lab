@@ -830,6 +830,17 @@ Control, and Robotics</p>
                                     <h3 class = "text-center">Initialize Kalman Filter</h3>
                                     <p class = "modal-body text-left">According to the lecture slide and Kalmen Filter pseudocode, matrices A, B, and C are required to initialize, which provides the state space equations. </p>
                                     <img class = "img-cetered img-fluid" src = "assets/img/portfolio/Lab7 KF state space eq.jpg" alt="">
+                                    <p class = "modal-body text-left">A and B matrices were calculated below and given the data sampling rate in Lab3, the ToF sampling rate is 100ms which is the delta_T to discretize the matrices. </p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/Lab7 KF AB matrices.png" alt="">
+                                    <p class = "modal-body">Noise covariance matrices are specified. The process noise sigma_u is determined by the sampling rate. The two standard deviations, sigma1 and sigma2, reflect the confidence in modeled position and speed respectively.
+                                        A diagonal matrix is utilized because it is assumed that they are uncorrelated.
+                                        Regarding sigma_z, which represents measurement noise, it is observed that the measurement error is approximately ±5 mm when the robot is stationary.
+                                        Considering that movement may introduce additional instability, four times this value is taken.</p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/Lab 7 KF function.png" alt="">
+                                    <p class = "modal-body text-left">The simulation result was shown below after adjusting the noise matrices. According to the plot, the estimate major overlapped the ground truth after the initalization.  </p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/Lab7 KF plot.png" alt="">
+
+                                    <p class = "modal-body text-left"></p>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
