@@ -859,7 +859,7 @@ Control, and Robotics</p>
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary mb-0">New Image</h2>
+                                    <h2 class="portfolio-modal-title text-secondary mb-0">Lab8: Stunt</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -868,7 +868,25 @@ Control, and Robotics</p>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-5">New Image Description</p>
+                                    <p class="mb-5">The purpose of this lab was to implement the orientation control to avoid obstacles using PID controller. The robot moved towards the wall and activated 180 degree turning to execute drift, when it is within 3 feet from the wall.</p>
+                                    <h3 class = "text-center">Execution Structure</h3>
+                                    <p class = "modal-body text-left">The whole execcution could be broken down into two steps: 
+                                        The robot activates time-of-flight sensor to constantly receive distance values. Once the distance meet the threshold, it shifts to the second step. In the second step, the desired yaw angle is set to current degree plus 180 degree.
+                                         Then, the deisred angle is used to operate the PID controller to orient the robot to the opposite direction. </p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/Lab8 forward phase.png" alt="">
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/Lab8 PID phase.png" alt="">
+                                    <h3 class = "text-center">PID Tuning</h3>
+                                    <p class = "modal-body text-left">After establish the execution structure, the next step was to determine the PID values. At the begining, the PID value was inherited from lab 6 orientation control. The P value was 1.1, I value was 0.2, D value was 0.38. After testing, the previous values did not provide a steady result.
+                                        The final PID values were set to Kp = 0.45, Ki = 0.0005, Kd = 0.04.  </p>
+                                    <div class = "embed-container">
+                                        <iframe width="420" height="747" src="https://www.youtube.com/embed/j8HMWvzATxg" title="ECE5160 LAB8 Stunt1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    </div>
+                                    <div class = "embed-container">
+                                        <iframe width="420" height="747" src="https://www.youtube.com/embed/Gg3AJzDniF4" title="ECE5160 LAB8 Stunt2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    </div>
+                                    <div class = "embed-container">
+                                        <iframe width="420" height="747" src="https://www.youtube.com/embed/6O9-BvYheq8" title="ECE5160 LAB8 Stunt3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    </div>
                                     <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
                                 </div>
                             </div>
