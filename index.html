@@ -178,6 +178,20 @@ Control, and Robotics</p>
                         </div>
                     </div>
 
+
+                    <div class="col-md-6 col-lg-4 mb-5">
+                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal10">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                            </div><img class="img-fluid" src="assets/img/portfolio/Lab11 icon.jpeg" alt="Lab 11"/>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <h5 class = "text-center">Lab 11: Localization</h5>
+                        </div>
+                    </div>
+
                 
                 </div>
             </div>
@@ -939,7 +953,7 @@ Control, and Robotics</p>
                                     <h3 class = "text-center">Odoemtry Motion Model</h3>
                                     <p class = "modal-body text-left">
                                         In the odometry model, the probability of a robot's state is calculated based on a specified action. The intended transformation or rotation is considered, and the outcome is modeled as a Gaussian distribution with a given sigma value. The probabilities of the executed motions are estimated by treating them as independent events. By multiplying these probabilities, the likelihood of the robot reaching the final state after completing the entire motion sequence is determined.
-\                                    </p>
+                                    </p>
                                     <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab6 IMU measurement.png" alt="">
                                     <br>
                                     <br>
@@ -977,6 +991,56 @@ Control, and Robotics</p>
                 </div>
             </div>
         </div>
+
+        <div class="portfolio-modal modal fade" id="portfolioModal10" tabindex="-1" role="dialog" aria-labelledby="#portfolioModal6Label" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
+                    <div class="modal-body text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary mb-0">Lab11: Localization</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <!-- Portfolio Modal - Image-->
+                                    <!-- Portfolio Modal - Text-->
+                                    <p class="mb-5">In this laboratory activity, a robot equipped with a Time-of-Flight (ToF) sensor uses the Bayes filter to localize itself in the (x,y) plane. Starting at predetermined points along the x-axis, the robot performs environmental scans by rotating in 20-degree steps to achieve precise localization. Due to the broken ToF sensor, this lab was collobrated with Yunting Yan using his robot to perform. 
+                                    </p>
+                                    <h3 class = "text-center">Localization Simulation Process</h3>
+                                    <p class = "modal-body text-left"> According to the simulation result in Lab10, the belief(blue) and ground truth(green) have majority and effective overlapping which demonstrated the precision and accuracy of the robot were within the tolerance. The simulation was executed again before the actual implementation of localization. </p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab11 sim.jpg" alt="">
+                                    <h3 class = "text-center">Real Localization Setup</h3>
+                                    <p class = "modal-body text-left">Our goal was to localize the robot at four specific marked positions without any translational movement between these landmarks. Operating in this stationary context enabled us to initialize the belief with a uniform prior, which helped in accurately determining the robot's position at each marked spot. The program implemented allows the robot to rotate a full 360 degrees in place, collecting Time-of-Flight (ToF) sensor readings at 20-degree intervals.
+                                         We used a proportional orientation controller, since in previous labs, it showed that a proportional controller could complete the enviornmental information collection properly in this setup.  </p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab11 collect.png" alt="">
+
+                                    <p class = "modal-body text-left">According to the video, In the video, the robot starts from a fixed position and rotates 360 degrees, using its Time-of-Flight sensor to collect detailed environmental data every 20 degrees. It employs a proportional orientation controller for smooth rotations, effectively handling slight deviations from its original spot. Despite these minor shifts, the robot successfully completes its data collection, demonstrating accurate orientation and data capture, and illustrating its capability to operate effectively within set parameters.</p>
+                                    <div class = "embed-container">
+                                        <iframe width="600" height="500" src="https://www.youtube.com/embed/U4RSrb9gOgo" title="ECE5160 Lab11" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    </div>
+
+                                    <h3 class="text-center">Localization Result</h3>
+                                    <p class = "modal-body text-left">Landmarks were set at four spots: (-3 ft, -2 ft), (0 ft, 3 ft), (5 ft, -3 ft), and (5 ft, 3 ft). The robot was placed at these points, and the Bayes filter update was performed. The results are shown in a diagram, with green dots for the real positions and blue dots for the estimated positions.
+                                   In the initial landmark assessment, the x-coordinate is pinpointed with precision, while the y-coordinate shows a minor variance, likely stemming from an inaccurately estimated orientation. Nevertheless, the robot still holds a relatively accurate positional estimation. Moving to the second scenario, there’s a pronounced orientation discrepancy of 150 degrees, effectively flipping the perceived map compared to reality. This substantial misalignment skews the Time-of-Flight (ToF) sensor data, causing measurements intended for the positive x-direction to seem as though they are from the negative. Addressing this misorientation is critical for proper localization. In the third situation, we see a similar issue with an orientation error of 130 degrees, which mirrors the real-world positioning in the robot’s computational model. The fourth scenario presents a slight 10-degree orientation error, attributable to the grid localization method that utilizes 20-degree increments along the theta axis, resulting in some unavoidable precision loss. 
+                                        A finer grid might boost the accuracy of the localization process.</p>
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab11_data1.bmp" alt="">
+                                    <img class = "img-cetered img-fluid" src = "assets/img/portfolio/lab11 table.jpg" alt="">
+
+                                    <button class="btn btn-primary" href="#" data-dismiss="modal"><i class="fas fa-times fa-fw"></i>Close Window</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <section class="page-section bg-primary text-white mb-0" id="about">
             <div class="container">
